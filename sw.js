@@ -1,5 +1,5 @@
-// service worker «Планета игр» — версия по содержимому: c5facb675f
-const CACHE = 'markgames-c5facb675f';
+// service worker «Планета игр» — версия по содержимому: 76b76012a9
+const CACHE = 'markgames-76b76012a9';
 const ASSETS = ["./", "./index.html", "./manifest.webmanifest", "./icon-192.png", "./icon-512.png", "./apple-touch-icon.png", "./img/adventure-1.jpg", "./img/adventure-2.jpg", "./img/adventure-icon.png", "./img/bitva-1.jpg", "./img/bitva-2.jpg", "./img/bitva-icon.png", "./img/brain-1.jpg", "./img/brain-icon.png", "./img/draw-1.jpg", "./img/draw-2.jpg", "./img/draw-icon.png", "./img/emoplanet-1.jpg", "./img/emoplanet-2.jpg", "./img/emoplanet-3.jpg", "./img/emoplanet-icon.png", "./img/kart-1.jpg", "./img/kart-2.jpg", "./img/kart-3.jpg", "./img/kart-icon.png", "./img/matshtorm-1.jpg", "./img/matshtorm-2.jpg", "./img/matshtorm-3.jpg", "./img/matshtorm-icon.png", "./img/nightshift-1.jpg", "./img/nightshift-2.jpg", "./img/nightshift-3.jpg", "./img/nightshift-icon.png", "./img/obzhora-1.jpg", "./img/obzhora-2.jpg", "./img/obzhora-icon.png", "./img/party-1.jpg", "./img/party-2.jpg", "./img/party-icon.png", "./img/phantom-1.jpg", "./img/phantom-2.jpg", "./img/phantom-icon.png", "./img/spider-1.jpg", "./img/spider-2.jpg", "./img/spider-icon.png", "./img/technobunt-1.jpg", "./img/technobunt-2.jpg", "./img/technobunt-3.jpg", "./img/technobunt-icon.png"];
 self.addEventListener('install', e => { e.waitUntil((async () => {
   const c = await caches.open(CACHE);
