@@ -1,6 +1,6 @@
 {
-  "name": "Игры Марка",
-  "short_name": "Игры Марка",
+  "name": "Планета игр",
+  "short_name": "Планета игр",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",

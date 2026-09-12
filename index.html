@@ -7,25 +7,35 @@
 <meta name="theme-color" content="#0b1020">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
-<title>🕹 МАРКАДА — игры Марка</title>
+<title>🪐 Планета игр</title>
 <style>
   *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
   html,body{min-height:100%;background:#070b16;color:#eef3ff;
     font-family:-apple-system,"Segoe UI",system-ui,sans-serif;overflow-x:hidden}
-  /* 🕹 2D-ЗАЛ: тёмные стены, неоновое зарево и ковровый пол в перспективе (просьба Марка) */
+  /* 🪐 ПЛАНЕТА ИГР: звёздное небо, неоновое зарево и круглый бок планеты внизу,
+     на котором и стоят игровые автоматы (2D-лобби — просьба Марка) */
   body{background:
     radial-gradient(760px 420px at 50% -6%, #a855f766, transparent 62%),
-    radial-gradient(680px 380px at 8% 16%, #0ea5e955, transparent 60%),
-    radial-gradient(680px 380px at 92% 16%, #ff5fa255, transparent 60%),
-    linear-gradient(180deg, #120a28 0%, #0b0a1c 46%, #1a1030 47%, #0a0716 100%);}
-  body::before{content:'';position:fixed;left:0;right:0;bottom:0;height:54%;z-index:0;pointer-events:none;
+    radial-gradient(680px 380px at 8% 14%, #0ea5e955, transparent 60%),
+    radial-gradient(680px 380px at 92% 14%, #ff5fa255, transparent 60%),
+    radial-gradient(2px 2px at 12% 18%, #fff8, transparent 60%),
+    radial-gradient(2px 2px at 28% 9%,  #fff6, transparent 60%),
+    radial-gradient(2px 2px at 46% 22%, #fff7, transparent 60%),
+    radial-gradient(2px 2px at 63% 7%,  #fff5, transparent 60%),
+    radial-gradient(2px 2px at 81% 20%, #fff8, transparent 60%),
+    radial-gradient(2px 2px at 92% 11%, #fff6, transparent 60%),
+    radial-gradient(2px 2px at 20% 34%, #fff5, transparent 60%),
+    radial-gradient(2px 2px at 72% 33%, #fff6, transparent 60%),
+    linear-gradient(180deg, #0a0720 0%, #0b0a1c 60%, #07061a 100%);}
+  /* бок планеты */
+  body::before{content:'';position:fixed;left:-30%;right:-30%;bottom:-62vh;height:104vh;z-index:0;
+    pointer-events:none;border-radius:50% 50% 0 0;
     background:
-      repeating-linear-gradient(90deg, #ffffff0c 0 2px, transparent 2px 52px),
-      repeating-linear-gradient(0deg, #ffffff0a 0 2px, transparent 2px 44px),
-      linear-gradient(180deg, #2a1246 0%, #150a28 100%);
-    transform:perspective(340px) rotateX(56deg);transform-origin:bottom center;opacity:.75}
+      radial-gradient(120% 80% at 50% 6%, #6d3ab055 0 42%, transparent 62%),
+      linear-gradient(180deg, #3a1f66 0%, #251440 34%, #150c28 100%);
+    box-shadow:0 -14px 60px #a855f755, inset 0 14px 40px #ffffff14}
   body::after{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
-    background:repeating-linear-gradient(0deg, #ffffff08 0 1px, transparent 1px 3px);opacity:.35}
+    background:repeating-linear-gradient(0deg, #ffffff07 0 1px, transparent 1px 3px);opacity:.3}
   .wrap{position:relative;z-index:1}
   .wrap{max-width:1180px;margin:0 auto;padding:26px 16px 60px}
   header{text-align:center;margin-bottom:22px}
@@ -111,8 +121,8 @@
 <body>
 <div class="wrap">
   <header>
-    <h1>🕹 МАРКАДА</h1>
-    <div class="sub">Зал игровых автоматов Марка. Подойди к автомату — посмотри, что внутри, и играй.</div>
+    <h1>🪐 ПЛАНЕТА ИГР</h1>
+    <div class="sub">Здесь стоят все игры Марка. Подойди к автомату — посмотри, что внутри, и играй.</div>
     <div class="count" id="count">13 игр</div>
   </header>
 
@@ -132,7 +142,7 @@
   <div class="grid" id="grid"></div>
 
   <footer>
-    <b>МАРКАДА</b> — зал, где стоят все игры Марка.<br>
+    <b>ПЛАНЕТА ИГР</b> — место, где собраны все игры Марка.<br>
     Придумал и заказал их все — <b>Марк</b>.<br>
     Работают без интернета: открой игру и нажми «Добавить на экран Домой».
   </footer>
@@ -143,7 +153,9 @@
 </div>
 
 <script>
-/* 🕹 МАРКАДА. Список игр: сюжет — словами Марка, где он их надиктовал. */
+/* 🪐 ПЛАНЕТА ИГР (название Марка). Список игр: сюжет — словами Марка.
+   ⚠️ ПРАВИЛО МАРКА: сделали новую игру — СРАЗУ добавляем её сюда:
+   запись в массив ИГРЫ + иконка и скриншоты в pwa/img/. */
 const ИГРЫ = [
   { id:'phantom', имя:'Тайна поместья Фантомовых', em:'👻', url:'https://maksimdodychin.github.io/mark-phantom/',
     метки:['vac','spooky','solo'], новое:false, shots:2,
