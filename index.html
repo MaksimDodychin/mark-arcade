@@ -116,11 +116,71 @@
   .btn:active{transform:translateY(4px);box-shadow:0 1px 0 #9a6408}
   .btn.gh{background:#ffffff10;color:#dbe7ff;box-shadow:0 5px 0 #ffffff12;border:1.5px solid #ffffff22}
   footer{text-align:center;opacity:.45;font-size:12px;margin-top:34px;line-height:1.7}
+/* Native 2D cosmic arcade; the original icons, names and hit targets remain the content. */
+:root{--planet-ink:#ecf7ff;--planet-gold:#ffe7a7;--planet-blue:#7acddf}
+body{background:radial-gradient(ellipse at 14% 6%,#183d5688,transparent 38%),radial-gradient(ellipse at 88% 14%,#57376577,transparent 42%),linear-gradient(#080e20,#12162b 55%,#101429);color:var(--planet-ink)}
+body::before{left:-45%;right:-45%;bottom:-91vh;height:133vh;background:radial-gradient(ellipse at 48% 0%,#709ea580,transparent 36%),repeating-radial-gradient(ellipse at 50% 9%,transparent 0 42px,#accddd0d 43px 44px,transparent 45px 82px),linear-gradient(180deg,#344963,#243149 42%,#131b30);box-shadow:0 -2px 0 #a8dfe940,0 -18px 65px #2c859733,inset 0 25px 50px #accddd14}
+body::after{background:radial-gradient(1px 1px at 20px 32px,#d2efffa6 70%,transparent),radial-gradient(1px 1px at 114px 97px,#c5d7ff70 70%,transparent),radial-gradient(1.5px 1.5px at 231px 64px,#fff0bd99 70%,transparent);background-size:271px 193px,317px 271px,379px 229px;opacity:.5}
+.wrap{max-width:1220px;padding:25px 22px 54px}
+header{isolation:isolate;position:relative;overflow:hidden;min-height:210px;border-radius:30px;padding:31px 20px 24px;margin-bottom:18px;border:1px solid #b8d9e323;background:linear-gradient(125deg,#16283ad9,#101b31de 54%,#2d2342e8);box-shadow:inset 0 1px #e0f3ff12,0 20px 50px #01061435}
+.planet-header-art{position:absolute;inset:0;width:100%;height:100%;z-index:-1;pointer-events:none;opacity:.9}
+header h1{position:relative;font-size:clamp(28px,5vw,51px);letter-spacing:-1.6px;background:linear-gradient(110deg,#fff3c4 22%,#f2f9ff 54%,#a8e5e5 84%);background-clip:text;-webkit-background-clip:text;text-shadow:none;filter:drop-shadow(0 4px 0 #07122466)}
+.sub{max-width:680px;margin:10px auto 0;color:#c1d4e2;opacity:1;line-height:1.55;font-size:14px}
+.count{background:#081321b3;border-color:#a4c9d72e;color:#cbe0e8;font-size:12px;padding:6px 14px;margin-top:14px;box-shadow:inset 0 1px #fff08}
+.toolbar{margin-top:20px;gap:9px}
+.f{background:linear-gradient(#23364aa6,#16253c);border:1px solid #9bc4d534;color:#c9dee9;padding:10px 17px;box-shadow:0 3px 0 #050c1a55;transition:background .16s,transform .16s,border-color .16s;font-size:13px;font-weight:750}
+.f.on{background:linear-gradient(140deg,#fff0b6,#e8bc6e);border-color:#f0d591;color:#293043;box-shadow:0 3px 0 #987344}
+.f:hover{border-color:#a7d7e68c;transform:translateY(-1px)}
+.f:focus-visible,.tile:focus-visible,.btn:focus-visible{outline:3px solid #9de4ea;outline-offset:4px}
+.lupa{width:44px;height:42px;padding:0;font-size:18px}
+#badBtn{background:linear-gradient(140deg,#503149,#34243d);border-color:#d697b640;color:#efcada}
+#search input{height:42px;background:#0b172bdd;border-color:#8bbcc94d;font-family:inherit;font-size:14px;box-shadow:inset 0 2px 5px #02081955}
+.filters{margin:16px 0 26px;gap:9px}
+.grid{gap:23px 19px;grid-template-columns:repeat(auto-fill,minmax(174px,1fr))}
+.tile{--cabinet:#6cbed0;--cabinet-dim:#315167;isolation:isolate;padding:22px 13px 61px;border:1px solid #b4d4e53b;border-radius:21px 21px 15px 15px;background:linear-gradient(90deg,#d3e8f20d 0 4px,transparent 4px calc(100% - 4px),#0107135c calc(100% - 4px)),linear-gradient(160deg,#2a4055,#15273b 52%,#101c30);box-shadow:inset 0 1px 0 #e7faff40,inset 0 -8px 0 #040d20b0,0 7px 0 #060e20,0 14px 26px #02061288;transform-origin:50% 80%}
+.tile[data-id="ghostlife"],.tile[data-id="phantom"],.tile[data-id="spider"]{--cabinet:#ba9dda;--cabinet-dim:#4c4165}
+.tile[data-id="emoplanet"],.tile[data-id="party"],.tile[data-id="draw"]{--cabinet:#e9ab99;--cabinet-dim:#61485d}
+.tile[data-id="adventure"],.tile[data-id="obzhora"]{--cabinet:#a4cda0;--cabinet-dim:#425c55}
+.tile[data-id="matshtorm"],.tile[data-id="brain"]{--cabinet:#ddc386;--cabinet-dim:#595449}
+.tile::before{left:9px;right:9px;top:7px;height:13px;border-radius:12px 12px 5px 5px;background:linear-gradient(180deg,#fff8,transparent 50%),linear-gradient(90deg,var(--cabinet-dim),var(--cabinet) 35%,var(--cabinet) 65%,var(--cabinet-dim));box-shadow:0 2px 0 #060c19,0 3px 14px #9fdce91a}
+.tile::after{left:12px;right:12px;bottom:14px;transform:none;width:auto;height:36px;border-radius:8px 8px 12px 12px;border-top:1px solid #a8cede42;background:radial-gradient(circle at 27% 40%,#ffc7b7 0 3px,#d97175 3.5px 7px,#070f22 7.5px 10px,transparent 10.5px),radial-gradient(ellipse at 27% 75%,#050b17 0 15px,transparent 15.5px),linear-gradient(#98a7b6,#44566c) 27% 64% / 4px 11px no-repeat,radial-gradient(circle at 68% 53%,#fff0b1 0 3px,#d2ad69 3.5px 6px,#071024 6.5px 8px,transparent 8.5px),radial-gradient(circle at 83% 53%,#b0e4dd 0 3px,#60adad 3.5px 6px,#071024 6.5px 8px,transparent 8.5px),linear-gradient(160deg,#334a5e,#18283c 66%);box-shadow:0 3px 0 #020b1d,inset 0 -1px #adc6db14}
+.tile img.ic{width:99px;height:99px;object-fit:contain;box-sizing:content-box;padding:7px;background:#080e20;border:1px solid #93c3d744;border-radius:15px;margin:3px auto 16px;box-shadow:0 0 0 4px #080e20,0 0 0 5px #58718773,0 10px 19px #02081988,inset 0 1px #d5efff24}
+.tile .nm{font-size:14px;line-height:1.27;min-height:36px;text-wrap:balance;color:#f0f6fb;text-shadow:0 2px #081224}
+.tile .tg{margin-top:9px;gap:4px;min-height:22px;align-items:flex-start}
+.tag{font-size:9.5px;background:#08172999;border-color:#9fbbca29;color:#b7cad7;padding:4px 7px;opacity:1}
+.tag.co{background:#132f33;border-color:#8fd0c236;color:#a9ddd1}.tag.new{background:#453a22;border-color:#e8c97b45;color:#f1d499}
+.tile:hover{transform:translateY(-5px);border-color:var(--cabinet);box-shadow:inset 0 1px #e7faff55,inset 0 -8px #040d20b0,0 11px 0 #060e20,0 22px 30px #02061299}
+.tile:active{transform:translateY(1px);box-shadow:inset 0 1px #e7faff30,0 3px 0 #060e20,0 8px 15px #02061288}
+.back{background:#050e1adb;backdrop-filter:blur(13px);padding:22px}
+.card{background:radial-gradient(ellipse at 100% 0%,#33455288,transparent 43%),linear-gradient(145deg,#1a2b3e,#101c2e);border:1px solid #96bdcf42;border-radius:27px;padding:22px;box-shadow:0 28px 90px #010611b3,inset 0 1px #e6f7ff12;scrollbar-width:thin;scrollbar-color:#57738b #0c192a;overscroll-behavior:contain}
+.chead{gap:16px;margin-bottom:18px;padding-bottom:17px;border-bottom:1px solid #b3ccd31a}
+.chead img{width:72px;height:72px;padding:4px;background:#080f20;border:1px solid #7293aa66;border-radius:17px;box-shadow:0 7px 14px #0004}
+.chead h2{font-size:clamp(20px,3vw,27px);letter-spacing:-.6px;color:#f1f5eb}
+.chead .who{color:#afc3d3;opacity:1;line-height:1.5;margin-top:7px}
+.shots{gap:12px;padding:2px 0 13px;margin-bottom:14px;scrollbar-width:thin;scrollbar-color:#68859b transparent}
+.shots img{border:1px solid #accbdc40;border-radius:13px;box-shadow:0 6px 15px #040a1755}
+.story{background:linear-gradient(110deg,#9980541f,#9cbaab09);border-left:3px solid #ceb477;border-radius:0 15px 15px 0;padding:15px 16px;margin-bottom:18px;color:#d8e0e6;line-height:1.7;font-size:14.5px}
+.story b,.desc b{color:#ead3a1}.desc{color:#d5e0e9;opacity:1;line-height:1.75}
+.bad{margin-top:22px}.badh{color:#e5b4c5;font-size:16px;letter-spacing:.1px;margin-bottom:12px}
+.badit{background:linear-gradient(110deg,#47314766,#1b263b77);border:1px solid #bb8ea533;border-radius:16px;padding:15px;gap:14px;margin-bottom:11px;box-shadow:inset 0 1px #fff07}
+.badit .e{flex:0 0 49px;width:49px;height:49px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:29px;background:radial-gradient(circle at 32% 23%,#74556a,#382b46 74%);border:1px solid #ba95aa45;box-shadow:0 4px 0 #0c1527}
+.badit .n{color:#f4d8e2;font-size:15px;margin:1px 0 5px;line-height:1.4}.badit .d{font-size:13.5px;color:#d3dce6;opacity:1;line-height:1.7}
+.card .row{position:sticky;bottom:-22px;z-index:2;margin-top:20px;padding:14px 0 3px;background:linear-gradient(transparent,#101c2ef5 17%,#101c2e);isolation:isolate}
+.btn{background:linear-gradient(145deg,#fff0b6,#ddb06a);color:#293043;border:1px solid #ffeab688;box-shadow:0 4px 0 #80613b;font-size:16px;font-weight:850}
+.btn.gh{background:linear-gradient(#304358,#213249);border-color:#8bb1c23d;color:#d4e5ed;box-shadow:0 4px 0 #071429}
+footer{opacity:1;color:#819baa;font-size:12px;line-height:1.9;margin-top:39px}footer b{color:#a8bfcb}
+@media(max-width:600px){.wrap{padding:14px 12px 37px}header{min-height:201px;padding:27px 13px 22px;border-radius:24px}header h1{font-size:30px;letter-spacing:-1px}.sub{font-size:12px;max-width:300px;line-height:1.6}.planet-header-art{width:100%;height:auto;top:auto;bottom:-7px;left:0;opacity:.85}.count{margin-top:13px}.toolbar{margin-top:18px}.filters{gap:7px;margin:14px 0 22px}.f{padding:9px 12px;font-size:11.5px}.lupa{padding:0}.grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:19px 13px}.tile{padding:22px 8px 57px;border-radius:18px 18px 13px 13px}.tile img.ic{width:84px;height:84px;padding:5px;margin-bottom:14px}.tile .nm{font-size:12.5px;min-height:34px}.tag{font-size:8.5px;padding:4px 5px}.tile .tg{min-height:21px}.back{padding:12px}.card{padding:16px;max-height:94dvh;border-radius:22px}.chead{gap:12px}.chead img{width:60px;height:60px;flex-shrink:0}.chead h2{font-size:21px}.badit{padding:12px;gap:10px}.badit .e{flex-basis:39px;width:39px;height:42px;font-size:26px}.badit .d{font-size:13px}.card .row{bottom:-16px;gap:9px;flex-wrap:nowrap}.btn{flex:1 1 auto;min-width:0;padding:13px 9px;font-size:14px}.shots img{height:min(205px,30vh)}.story{font-size:13px;padding:12px}.desc{font-size:13.5px}}
+@media(max-width:360px){header h1{font-size:27px}.tile img.ic{width:76px;height:76px}.tile .nm{font-size:11.8px}.tag{font-size:8px}}
+@media(prefers-reduced-motion:reduce){.tile,.f,.btn,#search{transition:none}}
+
+@media(max-width:600px){.card .row:has(#vmeste){flex-wrap:wrap}.card .row:has(#vmeste) .btn{flex:1 1 42%}.card .row:has(#vmeste) #cancel{flex-basis:100%;padding:10px 9px}}
+
 </style>
 </head>
 <body>
 <div class="wrap">
   <header>
+    <svg class="planet-header-art" aria-hidden="true" focusable="false" viewBox="0 0 1180 230" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg"><defs><radialGradient id="pl-orb" cx="33%" cy="22%" r="78%"><stop stop-color="#b1d8d6"/><stop offset=".26" stop-color="#659ca9"/><stop offset=".68" stop-color="#35566f"/><stop offset="1" stop-color="#1b2b44"/></radialGradient><linearGradient id="pl-ring"><stop stop-color="#f0d7a4" stop-opacity=".05"/><stop offset=".4" stop-color="#edcf9b" stop-opacity=".7"/><stop offset=".8" stop-color="#d8a478" stop-opacity=".25"/><stop offset="1" stop-color="#c5a0ba" stop-opacity=".1"/></linearGradient><radialGradient id="pl-moon"><stop stop-color="#e6cfa3"/><stop offset="1" stop-color="#947866"/></radialGradient></defs><g fill="#c8dfea" opacity=".6"><circle cx="67" cy="47" r="1.2"/><circle cx="119" cy="160" r="1"/><circle cx="204" cy="37" r="1.4"/><circle cx="306" cy="195" r="1"/><circle cx="447" cy="19" r="1"/><circle cx="757" cy="207" r="1"/><circle cx="863" cy="29" r="1.4"/><circle cx="1120" cy="173" r="1.3"/><circle cx="1144" cy="45" r="1"/></g><g transform="translate(1040 120) rotate(-23)"><ellipse rx="206" ry="62" fill="none" stroke="#d6d4bd" stroke-opacity=".11"/><ellipse rx="172" ry="47" fill="none" stroke="url(#pl-ring)" stroke-width="15"/><circle r="89" fill="url(#pl-orb)" stroke="#bfe8e6" stroke-opacity=".25"/><path d="M-80-35Q-22-4 74-45M-85-12Q-15 20 87-17M-82 17Q-12 49 80 15M-68 49Q-8 73 59 46" fill="none" stroke="#a6ccc7" stroke-opacity=".1" stroke-width="10"/><path d="M-172 0A172 47 0 0 0 172 0" fill="none" stroke="url(#pl-ring)" stroke-width="15"/></g><g transform="translate(145 123)"><circle r="43" fill="#526076" opacity=".34"/><circle cx="-7" cy="-7" r="37" fill="url(#pl-moon)" opacity=".64"/><g fill="#756d71" opacity=".32"><circle cx="-17" cy="-13" r="10"/><circle cx="3" cy="15" r="6"/><circle cx="12" cy="-21" r="4"/></g><ellipse rx="93" ry="62" transform="rotate(-30)" fill="none" stroke="#c4d4d8" stroke-opacity=".14"/><circle cx="75" cy="-38" r="4" fill="#c9e4dc" opacity=".8"/></g><g stroke="#e5e2c0" stroke-linecap="round" opacity=".55"><path d="M290 66v10m-5-5h10M810 152v8m-4-4h8M70 190v8m-4-4h8"/></g></svg>
     <h1>🪐 ПЛАНЕТА ИГР</h1>
     <div class="sub">Здесь стоят все игры Марка. Подойди к автомату — посмотри, что внутри, и играй.</div>
     <div class="count" id="count">13 игр</div>
@@ -301,10 +361,20 @@ function открыть(id) {
     ${злодеи}
     <div class="row">
       <a class="btn" href="${и.url}" target="_blank" rel="noopener">▶️ ИГРАТЬ</a>
+      <button class="btn gh" id="vmeste">👥 ИГРАТЬ С ДРУГОМ</button>
       <button class="btn gh" id="cancel">✖️ Отмена</button>
     </div>`;
   back.classList.add('show'); card.scrollTop = 0;
   document.getElementById('cancel').onclick = закрыть;
+  /* 👥 «играть с другом»: если комната уже есть и ты хозяин — уводим туда всех разом,
+     если комнаты нет — сначала открываем экран онлайна, чтобы её создать. */
+  document.getElementById('vmeste').onclick = () => {
+    const С = window.МКСеть;
+    if (!С) { alert('Онлайн ещё не загрузился, попробуй ещё раз'); return; }
+    if (С.вкл && С.хозяин) { С.позватьВИгру(и.url); return; }
+    if (С.вкл && !С.хозяин) { С.сказать('🎮 Давай в «' + и.имя + '»'); С.открыть(); return; }
+    С.открыть();
+  };
 }
 /* 😈 ГАЛЕРЕЯ ЗЛОДЕЕВ — все злодеи всех игр в одном месте (заказ Марка) */
 function галерея() {
@@ -339,7 +409,627 @@ document.getElementById('lupa').onclick = () => {
 поле.onkeydown = e => { if (e.key === 'Escape') { поле.value = ''; поиск = ''; нарисовать(); } };
 document.getElementById('badBtn').onclick = галерея;
 нарисовать();
-if ('serviceWorker' in navigator) addEventListener('load', () => navigator.serviceWorker.register('sw.js').catch(()=>{}));
+
 </script>
+<!-- 👥 ОНЛАЙН ПЛАНЕТЫ ИГР (заказ Марка 12.09.2026).
+     Один и тот же кусок вставляется во ВСЕ игры и в лобби. Даёт:
+     профиль (имя + аватарка), комнату по коду из 5 букв, список друзей,
+     чат готовыми фразами, голосовую связь и переход «идём играть вместе».
+     Связь идёт НАПРЯМУЮ между устройствами (WebRTC), своего сервера нет.
+     Все имена с приставкой mkn-, чтобы ничего не задеть в самой игре. -->
+<style>
+  #mkn-экран { position:fixed; inset:0; z-index:100001; display:none; overflow:auto;
+    background:radial-gradient(ellipse at 50% 20%, #1b2340f2, #05070ef8);
+    font-family:-apple-system,"Segoe UI",system-ui,sans-serif; color:#eaf0ff; padding:16px; }
+  #mkn-экран.mkn-on { display:block; }
+  .mkn-box { max-width:560px; margin:0 auto; }
+  .mkn-шапка { display:flex; align-items:center; gap:12px; background:#121a33cc; border:2px solid #ffffff1f;
+    border-radius:18px; padding:12px 14px; margin-bottom:14px; }
+  .mkn-ава { width:54px; height:54px; border-radius:16px; flex:none; background:#0a0e1c;
+    border:2px solid #ffffff26; }
+  .mkn-имя { font-weight:900; font-size:18px; }
+  .mkn-под { font-size:12.5px; opacity:.7; }
+  .mkn-х { margin-left:auto; font-size:26px; cursor:pointer; opacity:.7; padding:4px 8px; }
+  .mkn-х:hover { opacity:1; }
+  .mkn-карта { background:#121a33cc; border:2px solid #ffffff1f; border-radius:18px;
+    padding:14px; margin-bottom:12px; }
+  .mkn-карта h3 { font-size:16px; margin-bottom:8px; }
+  .mkn-кн { font:900 16px/1 inherit; padding:13px 18px; border:none; border-radius:14px; cursor:pointer;
+    background:linear-gradient(180deg,#bfe3ff,#2f7fd0); color:#05101f; box-shadow:0 5px 0 #17456f;
+    width:100%; margin-bottom:8px; }
+  .mkn-кн.mkn-зел { background:linear-gradient(180deg,#bbf7d0,#16a34a); box-shadow:0 5px 0 #0c5c2c; }
+  .mkn-кн.mkn-сер { background:#ffffff14; color:#dbe7ff; border:1.5px solid #ffffff26; box-shadow:none;
+    font-size:14px; padding:10px 14px; }
+  .mkn-кн:active { transform:translateY(3px); box-shadow:0 2px 0 #17456f; }
+  .mkn-кн:disabled { filter:grayscale(.7) brightness(.7); cursor:default; }
+  .mkn-ряд { display:flex; gap:8px; }
+  .mkn-ряд .mkn-кн { margin-bottom:0; }
+  #mkn-аваряд { display:grid; grid-template-columns:repeat(auto-fill,minmax(58px,1fr)); gap:8px; }
+  #mkn-аваряд canvas { width:100%; height:auto; border-radius:14px; cursor:pointer;
+    border:2px solid #ffffff1a; }
+  #mkn-аваряд canvas.mkn-выбр { border-color:#7dd3fc; box-shadow:0 0 14px #7dd3fc66; }
+  #mkn-поле { width:100%; font:900 26px/1 inherit; letter-spacing:8px; text-align:center; padding:12px;
+    border-radius:14px; border:2px solid #ffffff2a; background:#0a0e1c; color:#fff; text-transform:uppercase; }
+  #mkn-имяполе { width:100%; font:800 17px/1 inherit; padding:11px 12px; border-radius:12px;
+    border:2px solid #ffffff2a; background:#0a0e1c; color:#fff; }
+  .mkn-код { font:900 40px/1 inherit; letter-spacing:12px; text-align:center; color:#ffe08a;
+    text-shadow:0 0 22px #ffe08a55; padding:8px 0; }
+  .mkn-игрок { display:flex; align-items:center; gap:10px; background:#ffffff0d; border-radius:14px;
+    padding:8px 10px; margin-bottom:6px; }
+  .mkn-игрок canvas { width:36px; height:36px; border-radius:11px; }
+  .mkn-игрок .mkn-н { font-weight:800; font-size:15px; }
+  .mkn-игрок .mkn-т { margin-left:auto; font-size:11.5px; opacity:.7; }
+  #mkn-чат { max-height:170px; overflow:auto; background:#0a0e1c; border-radius:14px; padding:10px;
+    margin-bottom:8px; font-size:14px; line-height:1.5; }
+  #mkn-чат .mkn-стр { margin-bottom:4px; }
+  #mkn-чат b { color:#7dd3fc; }
+  #mkn-фразы { display:flex; flex-wrap:wrap; gap:6px; }
+  #mkn-фразы button { font:700 13px/1 inherit; padding:8px 11px; border-radius:11px; cursor:pointer;
+    border:1.5px solid #ffffff26; background:#ffffff12; color:#dbe7ff; }
+  #mkn-фразы button:active { transform:translateY(2px); }
+  .mkn-сост { font-size:13px; opacity:.8; text-align:center; margin-top:6px; min-height:18px; }
+  .mkn-беда { color:#ff9b9b; }
+  #mkn-пузырь { position:fixed; left:50%; bottom:18px; transform:translateX(-50%); z-index:100000;
+    background:#0b1220e8; border:2px solid #7dd3fc55; border-radius:14px; padding:9px 16px;
+    font:800 14px system-ui; color:#eaf0ff; display:none; max-width:80vw; text-align:center; }
+  #mkn-мини { position:fixed; left:6px; top:calc(50% + 100px); z-index:99999; display:none;
+    background:#0b1220dd; border:2px solid #7dd3fc44; border-radius:12px; padding:5px 9px;
+    font:800 12px system-ui; color:#7dd3fc; cursor:pointer; }
+  #mkn-мини.mkn-on { display:block; }
+</style>
+<div id="mkn-пузырь"></div>
+<div id="mkn-мини"></div>
+<div id="mkn-экран"><div class="mkn-box">
+  <div class="mkn-шапка">
+    <canvas class="mkn-ава" id="mkn-мояава" width="108" height="108"></canvas>
+    <div>
+      <div class="mkn-имя" id="mkn-моёимя">Игрок</div>
+      <div class="mkn-под" id="mkn-моёсост">не в комнате</div>
+    </div>
+    <div class="mkn-х" id="mkn-закрыть">✖️</div>
+  </div>
+
+  <div class="mkn-карта" id="mkn-профиль">
+    <h3>🧑‍🚀 Кто ты</h3>
+    <input id="mkn-имяполе" maxlength="14" placeholder="Твоё имя">
+    <div style="height:8px"></div>
+    <div id="mkn-аваряд"></div>
+    <div style="height:10px"></div>
+    <button class="mkn-кн mkn-зел" id="mkn-сохранить">✅ СОХРАНИТЬ</button>
+  </div>
+
+  <div class="mkn-карта" id="mkn-начало">
+    <h3>👥 Играть вместе</h3>
+    <button class="mkn-кн mkn-зел" id="mkn-создать">🏠 СОЗДАТЬ КОМНАТУ</button>
+    <div style="height:6px"></div>
+    <input id="mkn-поле" maxlength="5" placeholder="КОД">
+    <div style="height:8px"></div>
+    <button class="mkn-кн" id="mkn-войти">🚪 ВОЙТИ ПО КОДУ</button>
+    <div class="mkn-сост" id="mkn-сост"></div>
+  </div>
+
+  <div class="mkn-карта" id="mkn-комната" style="display:none">
+    <h3>🏠 Комната</h3>
+    <div class="mkn-под" style="text-align:center">Скажи друзьям этот код</div>
+    <div class="mkn-код" id="mkn-кодтут">—</div>
+    <div id="mkn-список"></div>
+    <div class="mkn-ряд">
+      <button class="mkn-кн mkn-сер" id="mkn-голос">🎙 ПОЗВАТЬ ГОЛОСОМ</button>
+      <button class="mkn-кн mkn-сер" id="mkn-выйти">🚪 ВЫЙТИ</button>
+    </div>
+    <div class="mkn-сост" id="mkn-сост2"></div>
+  </div>
+
+  <div class="mkn-карта" id="mkn-чаткарта" style="display:none">
+    <h3>💬 Переписка</h3>
+    <div id="mkn-чат"></div>
+    <div id="mkn-фразы"></div>
+  </div>
+
+  <div class="mkn-карта" id="mkn-друзья">
+    <h3>⭐ Друзья</h3>
+    <div id="mkn-друзьяспис"></div>
+    <div class="mkn-под" id="mkn-друзьяпусто">Пока никого. Сыграй с кем-нибудь — и сможешь добавить.</div>
+  </div>
+</div></div>
+<script>
+(function () {
+  'use strict';
+  const $ = id => document.getElementById(id);
+
+  /* ── АВАТАРКИ: тёмный фон и герой в центре (как описал Марк) ── */
+  const АВАТАРКИ = [
+    { id:'blik',    em:'👻', цв:'#7dd3fc', имя:'Блик' },
+    { id:'lampa',   em:'💡', цв:'#ffd24a', имя:'Лампочка' },
+    { id:'zhuk',    em:'🐞', цв:'#7ee787', имя:'Жучок' },
+    { id:'pylesos', em:'🧹', цв:'#c4b5fd', имя:'Пылесос' },
+    { id:'pauk',    em:'🕷', цв:'#f472b6', имя:'Паук' },
+    { id:'robot',   em:'🤖', цв:'#9fc6ff', имя:'Робот' },
+    { id:'kart',    em:'🏁', цв:'#fbbf24', имя:'Карт' },
+    { id:'planeta', em:'🪐', цв:'#a855f7', имя:'Планета' },
+    { id:'prizrak', em:'😱', цв:'#e0e7ff', имя:'Призрак' },
+    { id:'kot',     em:'🐱', цв:'#fb923c', имя:'Кот' },
+    { id:'kist',    em:'🎨', цв:'#4ade80', имя:'Кисть' },
+    { id:'cifra',   em:'🔢', цв:'#60a5fa', имя:'Цифра' },
+  ];
+  function рисоватьАву(cv, id) {
+    const а = АВАТАРКИ.find(x => x.id === id) || АВАТАРКИ[0];
+    const g = cv.getContext('2d'), S = cv.width;
+    const фон = g.createRadialGradient(S/2, S*0.4, 0, S/2, S/2, S*0.72);
+    фон.addColorStop(0, '#1d2742'); фон.addColorStop(1, '#070a14');
+    g.fillStyle = фон; g.fillRect(0, 0, S, S);
+    const сия = g.createRadialGradient(S/2, S/2, 0, S/2, S/2, S*0.46);
+    сия.addColorStop(0, а.цв + '55'); сия.addColorStop(1, а.цв + '00');
+    g.fillStyle = сия; g.fillRect(0, 0, S, S);
+    g.font = Math.round(S*0.56) + 'px system-ui, "Apple Color Emoji", "Segoe UI Emoji"';
+    g.textAlign = 'center'; g.textBaseline = 'middle';
+    g.fillText(а.em, S/2, S*0.54);
+    return cv;
+  }
+
+  /* ── ПРОФИЛЬ. Все игры лежат на одном адресе, поэтому профиль общий ── */
+  const КЛЮЧ = 'мк-профиль', КЛЮЧД = 'мк-друзья';
+  let профиль = { имя:'', ава:'blik' }, друзья = [];
+  try { profileLoad(); } catch (_) {}
+  function profileLoad() {
+    const p = JSON.parse(localStorage.getItem(КЛЮЧ) || 'null');
+    if (p && p.имя) профиль = p;
+    друзья = JSON.parse(localStorage.getItem(КЛЮЧД) || '[]');
+  }
+  function сохранитьПрофиль() {
+    try { localStorage.setItem(КЛЮЧ, JSON.stringify(профиль));
+      localStorage.setItem(КЛЮЧД, JSON.stringify(друзья)); } catch (_) {}
+  }
+
+  /* ── КОД КОМНАТЫ: пять русских букв, которые легко сказать вслух ── */
+  const БУКВЫ = 'АБВГДЕЖЗИКЛМНОПРСТУФ';
+  const ВЛАТ = { 'А':'A','Б':'B','В':'V','Г':'G','Д':'D','Е':'E','Ж':'J','З':'Z','И':'I','К':'K',
+                 'Л':'L','М':'M','Н':'N','О':'O','П':'P','Р':'R','С':'S','Т':'T','У':'U','Ф':'F' };
+  const ИЗЛАТ = {}; for (const к in ВЛАТ) ИЗЛАТ[ВЛАТ[к]] = к;
+  const вЛат = код => код.split('').map(c => ВЛАТ[c] || 'A').join('');
+  const изЛат = код => код.split('').map(c => ИЗЛАТ[c] || 'А').join('');
+  function новыйКод() { let к = ''; for (let i = 0; i < 5; i++) к += БУКВЫ[Math.floor(Math.random()*БУКВЫ.length)]; return к; }
+
+  /* ── ФРАЗЫ ДЛЯ ЧАТА. Писать руками не нужно — только жать кнопки ── */
+  const ФРАЗЫ = [
+    '👋 Привет!', '🎮 В какую игру поиграем?', '🕷 Давай в Паучий лабиринт',
+    '🏁 Давай в Гонки пылесосов', '👻 Давай в Жизнь призрака', '🌙 Давай в Ночную смену',
+    '🍽 Давай в Обжору', '🧹 Давай в Битву пылесосов', '▶️ Давайте уже начинать играть',
+    '⏳ Подожди чуть-чуть', '😂 Ха-ха!', '😱 Ой, страшно!', '👍 Хорошо', '👎 Не хочу',
+    '🏆 Я выиграл!', '😅 Ты меня обогнал', '🔁 Давай ещё раз', '🎙 Включи микрофон',
+    '👀 Я тебя вижу', '🆘 Помоги!', '💤 Я устал, пока!',
+  ];
+
+  /* ── СОСТОЯНИЕ СЕТИ ── */
+  let peer = null, хозяин = false, код = '', связи = [], хозСвязь = null;
+  let игроки = [];            // [{ид, имя, ава, хозяин}]
+  let мойИд = '', голосВкл = false, мойПоток = null, звонки = [];
+  const слушатели = { данные:[], игроки:[], старт:[], чат:[] };
+
+  const ИГРА = (location.pathname.match(/mark-([a-z0-9]+)/) || [,'arcade'])[1];
+  const ЛОББИ = 'https://maksimdodychin.github.io/mark-arcade/';
+
+  function пузырь(текст, сек) {
+    const d = $('mkn-пузырь'); d.textContent = текст; d.style.display = 'block';
+    clearTimeout(d._t); d._t = setTimeout(() => d.style.display = 'none', (сек || 3.5) * 1000);
+  }
+  function состояние(текст, беда) {
+    ['mkn-сост', 'mkn-сост2'].forEach(id => { const e = $(id); if (!e) return;
+      e.textContent = текст; e.className = 'mkn-сост' + (беда ? ' mkn-беда' : ''); });
+  }
+
+  /* ── подгружаем движок связи только когда он реально нужен ── */
+  function загрузитьPeer() {
+    if (window.Peer) return Promise.resolve();
+    const адреса = ['https://unpkg.com/peerjs@1.5.4/dist/peerjs.min.js',
+                    'https://cdn.jsdelivr.net/npm/peerjs@1.5.4/dist/peerjs.min.js'];
+    return new Promise((res, rej) => {
+      let i = 0;
+      const тянуть = () => {
+        if (i >= адреса.length) { rej(new Error('нет связи')); return; }
+        const s = document.createElement('script');
+        s.src = адреса[i++]; s.onload = () => res(); s.onerror = тянуть;
+        document.head.appendChild(s);
+      };
+      тянуть();
+    });
+  }
+
+  const идКомнаты = к => 'mkroom-' + вЛат(к);
+
+  async function создатьКомнату(готовыйКод) {
+    if (!профиль.имя) { пузырь('Сначала впиши имя и выбери аватарку'); открыть(); return; }
+    состояние('Открываю комнату…');
+    try { await загрузитьPeer(); }
+    catch (_) { состояние('Нет интернета. Онлайн работает только со связью.', true); return; }
+    код = готовыйКод || новыйКод();
+    хозяин = true;
+    if (peer) { try { peer.destroy(); } catch (_) {} }
+    peer = new Peer(идКомнаты(код), { debug:0 });
+    peer.on('open', ид => {
+      мойИд = ид; игроки = [{ ид, имя:профиль.имя, ава:профиль.ава, хозяин:true }];
+      показатьКомнату(); состояние('Комната открыта. Диктуй код!');
+      обновитьМини();
+    });
+    peer.on('connection', c => {
+      связи.push(c);
+      c.on('open', () => {
+        c.send({ т:'привет', игроки, хозяин:{ имя:профиль.имя, ава:профиль.ава } });
+      });
+      c.on('data', d => приняли(d, c));
+      c.on('close', () => { связи = связи.filter(x => x !== c);
+        игроки = игроки.filter(g => g.ид !== c.peer); разослать({ т:'люди', игроки });
+        рисоватьИгроков(); });
+    });
+    peer.on('error', e => {
+      if (String(e).includes('is taken')) { состояние('Такая комната уже есть — беру другой код', true);
+        setTimeout(() => создатьКомнату(), 400); return; }
+      состояние('Не получилось: ' + e.type, true);
+    });
+  }
+
+  async function войтиВКомнату(введён) {
+    if (!профиль.имя) { пузырь('Сначала впиши имя и выбери аватарку'); открыть(); return; }
+    const к = (введён || $('mkn-поле').value || '').toUpperCase().replace(/[^А-ЯЁ]/g, '').slice(0, 5);
+    if (к.length !== 5) { состояние('Код — ровно пять русских букв', true); return; }
+    состояние('Ищу комнату…');
+    try { await загрузитьPeer(); }
+    catch (_) { состояние('Нет интернета. Онлайн работает только со связью.', true); return; }
+    код = к; хозяин = false;
+    if (peer) { try { peer.destroy(); } catch (_) {} }
+    peer = new Peer({ debug:0 });
+    peer.on('open', ид => {
+      мойИд = ид;
+      хозСвязь = peer.connect(идКомнаты(к), { reliable:true });
+      хозСвязь.on('open', () => {
+        хозСвязь.send({ т:'явился', имя:профиль.имя, ава:профиль.ава });
+        показатьКомнату(); состояние('Вошёл в комнату ' + к);
+        обновитьМини();
+      });
+      хозСвязь.on('data', d => приняли(d, хозСвязь));
+      хозСвязь.on('error', () => состояние('Комната не отвечает', true));
+      хозСвязь.on('close', () => { состояние('Хозяин закрыл комнату', true); выйти(); });
+      setTimeout(() => { if (!хозСвязь || !хозСвязь.open) состояние('Такой комнаты нет. Проверь код.', true); }, 6000);
+    });
+    peer.on('call', зв => { зв.answer(мойПоток || undefined); принятьЗвонок(зв); });
+    peer.on('error', e => состояние('Не получилось: ' + e.type, true));
+  }
+
+  function разослать(о, кроме) {
+    if (хозяин) связи.forEach(c => { if (c !== кроме && c.open) { try { c.send(о); } catch (_) {} } });
+    else if (хозСвязь && хозСвязь.open) { try { хозСвязь.send(о); } catch (_) {} }
+  }
+
+  function приняли(d, откуда) {
+    if (!d || !d.т) return;
+    if (d.т === 'явился') {                       // к хозяину пришёл новый игрок
+      игроки.push({ ид:откуда.peer, имя:d.имя, ава:d.ава, хозяин:false });
+      разослать({ т:'люди', игроки });
+      рисоватьИгроков();
+      чатСтрока('система', d.имя + ' зашёл в комнату');
+      разослать({ т:'чат', имя:'', текст:d.имя + ' зашёл в комнату', сист:true });
+      запомнитьДруга({ имя:d.имя, ава:d.ава });
+      return;
+    }
+    if (d.т === 'привет') { игроки = d.игроки.concat([{ ид:мойИд, имя:профиль.имя, ава:профиль.ава }]);
+      рисоватьИгроков(); if (d.хозяин) запомнитьДруга(d.хозяин); return; }
+    if (d.т === 'люди') { игроки = d.игроки; рисоватьИгроков(); return; }
+    if (d.т === 'чат') { чатСтрока(d.сист ? 'система' : d.имя, d.текст);
+      if (хозяин) разослать(d, откуда);
+      слушатели.чат.forEach(f => f(d)); return; }
+    if (d.т === 'идём') { перейтиВИгру(d.url, false); return; }
+    if (d.т === 'старт') { слушатели.старт.forEach(f => f(d)); return; }
+    if (d.т === 'игра') {
+      if (хозяин) разослать(d, откуда);           // хозяин пересылает остальным
+      слушатели.данные.forEach(f => f(d.д, d.от));
+      return;
+    }
+  }
+
+  /* ── ЧАТ ── */
+  function чатСтрока(кто, текст) {
+    const c = $('mkn-чат'); if (!c) return;
+    const d = document.createElement('div'); d.className = 'mkn-стр';
+    d.innerHTML = кто === 'система' ? '<i style="opacity:.7">' + текст + '</i>'
+      : '<b>' + кто + ':</b> ' + текст;
+    c.appendChild(d); c.scrollTop = c.scrollHeight;
+    while (c.children.length > 60) c.removeChild(c.firstChild);
+  }
+  function сказать(текст) {
+    if (!peer) { пузырь('Сначала войди в комнату'); return; }
+    чатСтрока(профиль.имя, текст);
+    разослать({ т:'чат', имя:профиль.имя, текст });
+    пузырь('💬 ' + профиль.имя + ': ' + текст, 2.5);
+  }
+
+  /* ── ГОЛОС ── */
+  async function голос() {
+    if (!peer) { пузырь('Сначала войди в комнату'); return; }
+    if (голосВкл) { выключитьГолос(); return; }
+    try { мойПоток = await navigator.mediaDevices.getUserMedia({ audio:true, video:false }); }
+    catch (_) { состояние('Микрофон не разрешён. Разреши доступ в браузере.', true); return; }
+    голосВкл = true; $('mkn-голос').textContent = '🔇 ВЫКЛЮЧИТЬ МИКРОФОН';
+    состояние('🎙 Микрофон включён — тебя слышно');
+    игроки.forEach(г => { if (г.ид && г.ид !== мойИд) принятьЗвонок(peer.call(г.ид, мойПоток)); });
+    if (!хозяин && хозСвязь) принятьЗвонок(peer.call(идКомнаты(код), мойПоток));
+  }
+  function принятьЗвонок(зв) {
+    if (!зв) return; звонки.push(зв);
+    зв.on('stream', поток => {
+      let a = document.getElementById('mkn-зв-' + зв.peer);
+      if (!a) { a = document.createElement('audio'); a.id = 'mkn-зв-' + зв.peer;
+        a.autoplay = true; a.style.display = 'none'; document.body.appendChild(a); }
+      a.srcObject = поток; a.play().catch(() => {});
+    });
+    зв.on('close', () => { const a = document.getElementById('mkn-зв-' + зв.peer); if (a) a.remove(); });
+  }
+  function выключитьГолос() {
+    голосВкл = false; $('mkn-голос').textContent = '🎙 ПОЗВАТЬ ГОЛОСОМ';
+    звонки.forEach(з => { try { з.close(); } catch (_) {} }); звонки = [];
+    if (мойПоток) { мойПоток.getTracks().forEach(t => t.stop()); мойПоток = null; }
+    состояние('Микрофон выключен');
+  }
+
+  /* ── ПЕРЕХОД «ИДЁМ ИГРАТЬ ВМЕСТЕ» ──
+     Связь не переживает переход на другую страницу, поэтому договариваемся
+     кодом: все уходят по адресу с ?мк=КОД и там автоматически снова находятся. */
+  function позватьВИгру(url) {
+    if (!peer) { пузырь('Сначала создай комнату'); return; }
+    if (!хозяин) { пузырь('Позвать в игру может только хозяин комнаты'); return; }
+    разослать({ т:'идём', url });
+    setTimeout(() => перейтиВИгру(url, true), 600);
+  }
+  function перейтиВИгру(url, яХозяин) {
+    const р = url + (url.includes('?') ? '&' : '?') + 'мк=' + encodeURIComponent(код) +
+      (яХозяин ? '&хоз=1' : '');
+    location.href = р;
+  }
+
+  /* ── ДРУЗЬЯ ── */
+  function запомнитьДруга(д) {
+    if (!д || !д.имя || д.имя === профиль.имя) return;
+    if (друзья.some(f => f.имя === д.имя)) return;
+    друзья.push({ имя:д.имя, ава:д.ава || 'blik' });
+    сохранитьПрофиль(); рисоватьДрузей();
+  }
+  function рисоватьДрузей() {
+    const с = $('mkn-друзьяспис'); с.innerHTML = '';
+    $('mkn-друзьяпусто').style.display = друзья.length ? 'none' : 'block';
+    друзья.forEach((д, i) => {
+      const r = document.createElement('div'); r.className = 'mkn-игрок';
+      const cv = document.createElement('canvas'); cv.width = cv.height = 72; рисоватьАву(cv, д.ава);
+      r.appendChild(cv);
+      const n = document.createElement('div'); n.className = 'mkn-н'; n.textContent = д.имя; r.appendChild(n);
+      const x = document.createElement('div'); x.className = 'mkn-т'; x.textContent = '✖️';
+      x.style.cursor = 'pointer';
+      x.onclick = () => { друзья.splice(i, 1); сохранитьПрофиль(); рисоватьДрузей(); };
+      r.appendChild(x);
+      с.appendChild(r);
+    });
+  }
+
+  /* ── ЭКРАНЫ ── */
+  function рисоватьИгроков() {
+    const с = $('mkn-список'); if (!с) return;
+    с.innerHTML = '';
+    игроки.forEach(г => {
+      const r = document.createElement('div'); r.className = 'mkn-игрок';
+      const cv = document.createElement('canvas'); cv.width = cv.height = 72; рисоватьАву(cv, г.ава);
+      r.appendChild(cv);
+      const n = document.createElement('div'); n.className = 'mkn-н'; n.textContent = г.имя; r.appendChild(n);
+      const t = document.createElement('div'); t.className = 'mkn-т';
+      t.textContent = г.хозяин ? 'хозяин' : (г.ид === мойИд ? 'это ты' : 'друг');
+      r.appendChild(t);
+      с.appendChild(r);
+    });
+    $('mkn-моёсост').textContent = код ? ('в комнате ' + код + ' · игроков ' + игроки.length) : 'не в комнате';
+    обновитьМини();
+    слушатели.игроки.forEach(f => f(игроки));
+  }
+  function показатьКомнату() {
+    $('mkn-начало').style.display = 'none';
+    $('mkn-комната').style.display = 'block';
+    $('mkn-чаткарта').style.display = 'block';
+    $('mkn-кодтут').textContent = код;
+    рисоватьИгроков();
+  }
+  function выйти() {
+    try { if (peer) peer.destroy(); } catch (_) {}
+    peer = null; связи = []; хозСвязь = null; игроки = []; код = ''; хозяин = false;
+    выключитьГолос();
+    $('mkn-начало').style.display = 'block';
+    $('mkn-комната').style.display = 'none';
+    $('mkn-чаткарта').style.display = 'none';
+    $('mkn-моёсост').textContent = 'не в комнате';
+    обновитьМини();
+  }
+  function обновитьМини() {
+    const m = $('mkn-мини');
+    if (код && peer) { m.textContent = '👥 ' + код + ' · ' + игроки.length; m.classList.add('mkn-on'); }
+    else m.classList.remove('mkn-on');
+  }
+  function открыть() {
+    $('mkn-экран').classList.add('mkn-on');
+    $('mkn-имяполе').value = профиль.имя || '';
+    рисоватьАву($('mkn-мояава'), профиль.ава);
+    $('mkn-моёимя').textContent = профиль.имя || 'Игрок';
+    рисоватьРядАватарок(); рисоватьДрузей();
+  }
+  function рисоватьРядАватарок() {
+    const р = $('mkn-аваряд'); р.innerHTML = '';
+    АВАТАРКИ.forEach(а => {
+      const cv = document.createElement('canvas'); cv.width = cv.height = 108;
+      рисоватьАву(cv, а.id); cv.title = а.имя;
+      if (а.id === профиль.ава) cv.className = 'mkn-выбр';
+      cv.onclick = () => { профиль.ава = а.id; рисоватьРядАватарок();
+        рисоватьАву($('mkn-мояава'), профиль.ава); };
+      р.appendChild(cv);
+    });
+  }
+
+  /* ── КНОПКИ ── */
+  $('mkn-закрыть').onclick = () => $('mkn-экран').classList.remove('mkn-on');
+  $('mkn-мини').onclick = открыть;
+  $('mkn-сохранить').onclick = () => {
+    const и = ($('mkn-имяполе').value || '').trim().slice(0, 14);
+    if (!и) { пузырь('Впиши имя'); return; }
+    профиль.имя = и; сохранитьПрофиль();
+    $('mkn-моёимя').textContent = и; рисоватьАву($('mkn-мояава'), профиль.ава);
+    пузырь('✅ Сохранил: ' + и);
+  };
+  $('mkn-создать').onclick = () => создатьКомнату();
+  $('mkn-войти').onclick = () => войтиВКомнату();
+  $('mkn-выйти').onclick = выйти;
+  $('mkn-голос').onclick = голос;
+  $('mkn-поле').addEventListener('input', e => {
+    e.target.value = e.target.value.toUpperCase().replace(/[^А-ЯЁ]/g, '').slice(0, 5);
+  });
+  (function фразы() {
+    const р = $('mkn-фразы');
+    ФРАЗЫ.forEach(ф => { const b = document.createElement('button');
+      b.textContent = ф; b.onclick = () => сказать(ф); р.appendChild(b); });
+  })();
+
+  /* ── кнопка 👥 в общей панели ── */
+  (function кнопка() {
+    const бар = document.getElementById('mkl-bar');
+    const b = document.createElement('div');
+    b.className = 'mkl-b'; b.id = 'mkn-кн-онлайн'; b.title = 'Играть с друзьями';
+    b.textContent = '👥';
+    b.style.background = 'radial-gradient(circle at 35% 30%,#7dd3fc,#0369a1)';
+    if (бар) бар.insertBefore(b, бар.children[1] || null);
+    else {
+      b.style.cssText += ';position:fixed;left:6px;top:50%;transform:translateY(-50%);z-index:99999;' +
+        'width:42px;height:42px;border-radius:50%;border:2px solid #ffffff44;cursor:pointer;color:#fff;' +
+        'font:800 17px/1 system-ui;display:flex;align-items:center;justify-content:center';
+      document.body.appendChild(b);
+    }
+    b.onclick = открыть;
+  })();
+
+  /* ── автоподключение после перехода «идём играть вместе» ── */
+  (function авто() {
+    const п = new URLSearchParams(location.search);
+    const к = (п.get('мк') || '').toUpperCase();
+    if (!к || к.length !== 5) return;
+    setTimeout(() => {
+      if (п.get('хоз') === '1') создатьКомнату(к); else войтиВКомнату(к);
+      пузырь('👥 Возвращаюсь в комнату ' + к, 4);
+    }, 900);
+  })();
+
+  /* ── ОБЩИЙ ДОСТУП ДЛЯ ИГР ── */
+  window.МКСеть = {
+    get вкл() { return !!peer && !!код; },
+    get хозяин() { return хозяин; },
+    get код() { return код; },
+    get игроки() { return игроки.slice(); },
+    get профиль() { return Object.assign({}, профиль); },
+    get голос() { return голосВкл; },
+    послать(д) { разослать({ т:'игра', д, от:мойИд }); },
+    старт(д) { разослать({ т:'старт', д }); слушатели.старт.forEach(f => f(д)); },
+    наДанные(f) { слушатели.данные.push(f); },
+    наИгроков(f) { слушатели.игроки.push(f); },
+    наСтарт(f) { слушатели.старт.push(f); },
+    наЧат(f) { слушатели.чат.push(f); },
+    сказать, открыть, выйти,
+    позватьВИгру,
+    создать: создатьКомнату,
+    войти: войтиВКомнату,
+    аватарка: рисоватьАву,
+    АВАТАРКИ, ФРАЗЫ,
+  };
+})();
+</script>
+
+<!-- PLANETA_UPDATER_START -->
+<script>window.__APP_VER="aec028e3ff";</script>
+
+<script>
+/* scoped PWA updater: the installed offline copy stays until a verified replacement activates. */
+(function () {
+  var scope = new URL('./', location.href).href;
+  var pending = '', checking = false, registrationPromise = null;
+  function banner(text) {
+    var d = document.getElementById('updBanner');
+    if (!d) { d = document.createElement('div'); d.id = 'updBanner';
+      d.style.cssText = 'position:fixed;left:50%;top:12px;transform:translateX(-50%);z-index:99999;background:#0b1220ee;color:#7dd3fc;font:900 15px system-ui;padding:10px 18px;border-radius:14px;border:2px solid #7dd3fc55;box-shadow:0 8px 24px #0009';
+      document.body.appendChild(d); }
+    d.textContent = text; return d;
+  }
+  function register() {
+    if (!('serviceWorker' in navigator)) return Promise.resolve(null);
+    if (!registrationPromise) registrationPromise = navigator.serviceWorker.register(new URL('sw.js', scope).href,
+      { scope: scope, updateViaCache: 'none' }).catch(function (e) { registrationPromise = null; throw e; });
+    return registrationPromise;
+  }
+  function navigate(version) {
+    var url = new URL(location.href); url.searchParams.set('v', version);
+    if (url.href === location.href) location.reload(); else location.replace(url.href);
+  }
+  if ('serviceWorker' in navigator) navigator.serviceWorker.addEventListener('controllerchange', function () {
+    if (pending) navigate(pending);
+  });
+  async function version() {
+    var url = new URL('version.json', scope); url.searchParams.set('t', Date.now());
+    var response = await fetch(url.href, { cache: 'no-store' });
+    if (!response.ok) throw new Error('version unavailable');
+    var value = await response.json();
+    if (!value || typeof value.v !== 'string' || !/^[a-zA-Z0-9._-]{1,80}$/.test(value.v)) throw new Error('invalid version');
+    return value.v;
+  }
+  async function applyUpdate(next) {
+    try {
+      if (typeof next !== 'string') next = await version();
+      if (next === window.__APP_VER) return false;
+      if (pending === next) return true;
+      pending = next; banner('🔄 Обновляю игру…');
+      var reg = await register();
+      if (reg) {
+        // The worker verifies index.html, fills its new cache, then takes over atomically.
+        await reg.update();
+      } else {
+        var target = new URL('index.html', scope); target.searchParams.set('v', next);
+        var response = await fetch(target.href, { cache: 'reload' });
+        if (!response.ok) throw new Error('update unavailable');
+        var match = (await response.text()).match(/window\.__APP_VER\s*=\s*["']([^"']+)["']/);
+        if (!match || match[1] !== next) throw new Error('update not ready');
+        navigate(next);
+      }
+      setTimeout(function () { if (pending) { pending = ''; var d = document.getElementById('updBanner'); if (d) d.remove(); } }, 20000);
+      return true;
+    } catch (_) {
+      pending = ''; var d = banner('📴 Обновление пока недоступно — игра работает офлайн');
+      setTimeout(function () { d.remove(); }, 3500); return false;
+    }
+  }
+  async function checkVersion(show) {
+    if (checking || pending) return false; checking = true;
+    try {
+      var next = await version();
+      if (next === window.__APP_VER) {
+        if (show === true) { var d = banner('✅ У тебя самая свежая версия'); setTimeout(function () { d.remove(); }, 2500); }
+        return false;
+      }
+      var action = function () { return applyUpdate(next); };
+      if (window.__onUpdate) window.__onUpdate(action); else await action();
+      return true;
+    } catch (_) {
+      if (show === true) { var d = banner('📴 Нет интернета — игра работает офлайн'); setTimeout(function () { d.remove(); }, 2500); }
+      return false;
+    } finally { checking = false; }
+  }
+  window.__forceUpdate = function () { return applyUpdate(); };
+  window.__checkUpdate = function () { return checkVersion(true); };
+  window.addEventListener('load', function () {
+    register().catch(function () {});
+    setTimeout(checkVersion, 500); setTimeout(checkVersion, 4000);
+  });
+  document.addEventListener('visibilitychange', function () { if (!document.hidden) checkVersion(); });
+  window.addEventListener('online', function () { checkVersion(); });
+  setInterval(checkVersion, 60000);
+})();
+</script>
+<!-- PLANETA_UPDATER_END -->
 </body>
 </html>
