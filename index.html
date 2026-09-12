@@ -467,6 +467,21 @@ document.getElementById('badBtn').onclick = галерея;
   #mkn-фразы button { font:700 13px/1 inherit; padding:8px 11px; border-radius:11px; cursor:pointer;
     border:1.5px solid #ffffff26; background:#ffffff12; color:#dbe7ff; }
   #mkn-фразы button:active { transform:translateY(2px); }
+  #mkn-пол { width:100%; height:auto; border-radius:14px; display:block; background:#0a0e1c;
+    border:2px solid #ffffff1a; touch-action:none; cursor:pointer; }
+  #mkn-ники { display:flex; flex-wrap:wrap; gap:6px; margin-bottom:4px; }
+  #mkn-ники button { font:700 12.5px/1 inherit; padding:7px 10px; border-radius:11px; cursor:pointer;
+    border:1.5px solid #ffffff26; background:#ffffff10; color:#dbe7ff; }
+  #mkn-ники button:active { transform:translateY(2px); }
+  #mkn-цвета { display:flex; flex-wrap:wrap; gap:6px; justify-content:center; margin-bottom:10px; }
+  #mkn-цвета div { width:26px; height:26px; border-radius:50%; cursor:pointer; border:2px solid #ffffff33; }
+  #mkn-цвета div.mkn-выбр { border-color:#fff; box-shadow:0 0 12px #ffffff88; transform:scale(1.15); }
+  #mkn-игрыряд { display:grid; grid-template-columns:repeat(auto-fill,minmax(96px,1fr)); gap:6px; }
+  #mkn-игрыряд button { font:800 12px/1.25 inherit; padding:9px 6px; border-radius:11px; cursor:pointer;
+    border:1.5px solid #ffffff26; background:#ffffff12; color:#dbe7ff; }
+  #mkn-игрыряд button:active { transform:translateY(2px); }
+  #mkn-вечь { background:#2a1f45; border:2px solid #a855f755; border-radius:14px; padding:10px;
+    margin-bottom:8px; text-align:center; font-size:14px; }
   .mkn-сост { font-size:13px; opacity:.8; text-align:center; margin-top:6px; min-height:18px; }
   .mkn-беда { color:#ff9b9b; }
   #mkn-пузырь { position:fixed; left:50%; bottom:18px; transform:translateX(-50%); z-index:100000;
@@ -491,7 +506,9 @@ document.getElementById('badBtn').onclick = галерея;
 
   <div class="mkn-карта" id="mkn-профиль">
     <h3>🧑‍🚀 Кто ты</h3>
-    <input id="mkn-имяполе" maxlength="14" placeholder="Твоё имя">
+    <input id="mkn-имяполе" maxlength="18" placeholder="Твоё имя">
+    <div class="mkn-под" style="margin:8px 0 5px">Или возьми готовый ник:</div>
+    <div id="mkn-ники"></div>
     <div style="height:8px"></div>
     <div id="mkn-аваряд"></div>
     <div style="height:10px"></div>
@@ -512,7 +529,18 @@ document.getElementById('badBtn').onclick = галерея;
     <h3>🏠 Комната</h3>
     <div class="mkn-под" style="text-align:center">Скажи друзьям этот код</div>
     <div class="mkn-код" id="mkn-кодтут">—</div>
+    <canvas id="mkn-пол" width="640" height="380"></canvas>
+    <div class="mkn-под" style="text-align:center;margin:4px 0 8px">
+      Бегай стрелками или тяни пальцем по комнате
+    </div>
+    <div id="mkn-цвета"></div>
     <div id="mkn-список"></div>
+    <div id="mkn-выбор" style="display:none">
+      <h3 style="margin-top:10px">🎮 Во что играем</h3>
+      <div id="mkn-игрыряд"></div>
+      <button class="mkn-кн mkn-зел" id="mkn-вечеринка" style="margin-top:8px">🎉 ВЕЧЕРИНКА ИЗ ТРЁХ ИГР</button>
+    </div>
+    <div id="mkn-вечь" style="display:none"></div>
     <div class="mkn-ряд">
       <button class="mkn-кн mkn-сер" id="mkn-голос">🎙 ПОЗВАТЬ ГОЛОСОМ</button>
       <button class="mkn-кн mkn-сер" id="mkn-выйти">🚪 ВЫЙТИ</button>
@@ -591,6 +619,15 @@ document.getElementById('badBtn').onclick = галерея;
   function новыйКод() { let к = ''; for (let i = 0; i < 5; i++) к += БУКВЫ[Math.floor(Math.random()*БУКВЫ.length)]; return к; }
 
   /* ── ФРАЗЫ ДЛЯ ЧАТА. Писать руками не нужно — только жать кнопки ── */
+  /* 🏷 ГОТОВЫЕ НИКИ (список Марка + мои добавки).
+     Можно взять любой, а можно вписать своё имя. */
+  const НИКИ = [
+    '🏁 Пылесосик', '🕷 Арахнофобия', '🧠 Гений', '🎉 Звезда вечеринок', '🍽 Обжора',
+    '🌙 Охранник 2.0', '⏻ Бытовой восстатель', '🌍 Призрак Блик', '👻 Фантом', '👻 Полтергейст',
+    '🔢 Не калькулятор', '🎨 Не художник',
+    '🪤 Ловец страхов', '🪐 Хозяин эмоций', '👀 Два зелёных глаза', '🤏 Щекотун',
+    '👤 Морф', '🤖 Робот-Дефект', '🕸 Мохноног', '🎳 Спортсмен', '🌺 Зевака', '🐱 Кот, который видит',
+  ];
   const ФРАЗЫ = [
     '👋 Привет!', '🎮 В какую игру поиграем?', '🕷 Давай в Паучий лабиринт',
     '🏁 Давай в Гонки пылесосов', '👻 Давай в Жизнь призрака', '🌙 Давай в Ночную смену',
@@ -605,6 +642,25 @@ document.getElementById('badBtn').onclick = галерея;
   let игроки = [];            // [{ид, имя, ава, хозяин}]
   let мойИд = '', голосВкл = false, мойПоток = null, звонки = [];
   const слушатели = { данные:[], игроки:[], старт:[], чат:[] };
+
+  /* игры, куда хозяин может увести всю комнату */
+  const СПИСОК = [
+    { id:'kart',      имя:'Гонки',        em:'🏁', вместе:true  },
+    { id:'bitva',     имя:'Битва',        em:'🧹', вместе:true  },
+    { id:'spider',    имя:'Лабиринт',     em:'🕷', вместе:true  },
+    { id:'adventure', имя:'Приключение',  em:'🌍', вместе:true  },
+    { id:'obzhora',   имя:'Обжора',       em:'🍽', вместе:true  },
+    { id:'nightshift',имя:'Ночная смена', em:'🌙', вместе:true  },
+    { id:'party',     имя:'Вечеринка',    em:'🎉', вместе:true  },
+    { id:'draw',      имя:'Рисовалка',    em:'🎨', вместе:true  },
+    { id:'ghostlife', имя:'Жизнь призрака', em:'👻', вместе:false },
+    { id:'phantom',   имя:'Поместье',     em:'👻', вместе:false },
+    { id:'emoplanet', имя:'Эмоциональная планета', em:'🪐', вместе:false },
+    { id:'technobunt',имя:'Технобунт',    em:'⏻', вместе:false },
+    { id:'matshtorm', имя:'Матшторм',     em:'🔢', вместе:false },
+    { id:'brain',     имя:'Головоломки',  em:'🧠', вместе:false },
+  ];
+  const адресИгры = id => 'https://maksimdodychin.github.io/mark-' + id + '/';
 
   const ИГРА = (location.pathname.match(/mark-([a-z0-9]+)/) || [,'arcade'])[1];
   const ЛОББИ = 'https://maksimdodychin.github.io/mark-arcade/';
@@ -715,8 +771,17 @@ document.getElementById('badBtn').onclick = галерея;
       рисоватьИгроков(); if (d.хозяин) запомнитьДруга(d.хозяин); return; }
     if (d.т === 'люди') { игроки = d.игроки; рисоватьИгроков(); return; }
     if (d.т === 'чат') { чатСтрока(d.сист ? 'система' : d.имя, d.текст);
+      if (!d.сист) { for (const к in человечки) if (человечки[к].имя === d.имя) {
+        человечки[к].фраза = d.текст; человечки[к].фразаT = 3.5; } }
       if (хозяин) разослать(d, откуда);
       слушатели.чат.forEach(f => f(d)); return; }
+    if (d.т === 'комн') {                       // положение и цвет человечка в 2D-комнате
+      if (хозяин) разослать(d, откуда);
+      const ч = человечки[d.ид] || (человечки[d.ид] = { x:0.5, y:0.6, цx:0.5, цy:0.6, цв:0, имя:d.имя });
+      ч.цx = d.x; ч.цy = d.y; ч.цв = d.цв; ч.имя = d.имя;
+      return;
+    }
+    if (d.т === 'вечеринка') { вечеринка = d.в; показатьВечеринку(); return; }
     if (d.т === 'идём') { перейтиВИгру(d.url, false); return; }
     if (d.т === 'старт') { слушатели.старт.forEach(f => f(d)); return; }
     if (d.т === 'игра') {
@@ -831,6 +896,7 @@ document.getElementById('badBtn').onclick = галерея;
     $('mkn-комната').style.display = 'block';
     $('mkn-чаткарта').style.display = 'block';
     $('mkn-кодтут').textContent = код;
+    рисоватьЦвета(); рисоватьВыборИгр(); показатьВечеринку();
     рисоватьИгроков();
   }
   function выйти() {
@@ -853,7 +919,18 @@ document.getElementById('badBtn').onclick = галерея;
     $('mkn-имяполе').value = профиль.имя || '';
     рисоватьАву($('mkn-мояава'), профиль.ава);
     $('mkn-моёимя').textContent = профиль.имя || 'Игрок';
-    рисоватьРядАватарок(); рисоватьДрузей();
+    рисоватьРядАватарок(); рисоватьНики(); рисоватьДрузей();
+  }
+  function рисоватьНики() {
+    const р = $('mkn-ники'); if (!р) return;
+    р.innerHTML = '';
+    НИКИ.forEach(н => {
+      const b = document.createElement('button'); b.textContent = н;
+      b.onclick = () => { $('mkn-имяполе').value = н;
+        профиль.имя = н; сохранитьПрофиль();
+        $('mkn-моёимя').textContent = н; пузырь('🏷 Теперь ты ' + н, 2.2); };
+      р.appendChild(b);
+    });
   }
   function рисоватьРядАватарок() {
     const р = $('mkn-аваряд'); р.innerHTML = '';
@@ -867,11 +944,209 @@ document.getElementById('badBtn').onclick = галерея;
     });
   }
 
+  /* ═══════════ 🏠 2D-КОМНАТА ОЖИДАНИЯ (заказ Марка) ═══════════
+     Пока все собираются, человечки бегают по комнате, выбирают себе цвет
+     и переписываются. Потом хозяин выбирает игру или вечеринку из трёх. */
+  const ЦВЕТА = ['#ef4444','#f59e0b','#eab308','#22c55e','#14b8a6','#38bdf8',
+                 '#8b5cf6','#ec4899','#e5e7eb','#fb923c'];
+  const человечки = {};              // ид → {x, y, цx, цy, цв, имя, фраза, фразаT}
+  let мойЦвет = 0, ходT = 0, тянуКуда = null;
+  try { мойЦвет = +(JSON.parse(localStorage.getItem(КЛЮЧ) || '{}').цвет || 0); } catch (_) {}
+  let вечеринка = null;
+  try { вечеринка = JSON.parse(localStorage.getItem('мк-вечеринка') || 'null'); } catch (_) {}
+
+  const пол = $('mkn-пол'), пг = пол.getContext('2d');
+  const КЛАВ = {};
+  addEventListener('keydown', e => { if ($('mkn-экран').classList.contains('mkn-on')) {
+    КЛАВ[e.code] = true;
+    if (['ArrowUp','ArrowDown','ArrowLeft','ArrowRight'].includes(e.code)) e.preventDefault(); } });
+  addEventListener('keyup', e => КЛАВ[e.code] = false);
+  пол.addEventListener('pointerdown', e => { тянуКуда = точкаПола(e); пол.setPointerCapture(e.pointerId); });
+  пол.addEventListener('pointermove', e => { if (тянуКуда) тянуКуда = точкаПола(e); });
+  пол.addEventListener('pointerup', () => тянуКуда = null);
+  пол.addEventListener('pointercancel', () => тянуКуда = null);
+  function точкаПола(e) {
+    const r = пол.getBoundingClientRect();
+    return { x: Math.max(0.05, Math.min(0.95, (e.clientX - r.left) / r.width)),
+             y: Math.max(0.12, Math.min(0.92, (e.clientY - r.top) / r.height)) };
+  }
+
+  function мойЧеловечек() {
+    if (!человечки[мойИд]) человечки[мойИд] = { x:0.5, y:0.6, цx:0.5, цy:0.6, цв:мойЦвет, имя:профиль.имя };
+    return человечки[мойИд];
+  }
+  function рисоватьЦвета() {
+    const р = $('mkn-цвета'); р.innerHTML = '';
+    ЦВЕТА.forEach((c, i) => {
+      const d = document.createElement('div'); d.style.background = c;
+      if (i === мойЦвет) d.className = 'mkn-выбр';
+      d.onclick = () => { мойЦвет = i; профиль.цвет = i; сохранитьПрофиль();
+        мойЧеловечек().цв = i; рисоватьЦвета(); послатьМесто(true); };
+      р.appendChild(d);
+    });
+  }
+  function послатьМесто(сразу) {
+    if (!peer || !код) return;
+    const я = мойЧеловечек();
+    разослать({ т:'комн', ид:мойИд, имя:профиль.имя, x:+я.x.toFixed(3), y:+я.y.toFixed(3), цв:мойЦвет });
+  }
+
+  function рисоватьКомнату(dt) {
+    const W = пол.width, H = пол.height;
+    /* пол и ковёр */
+    const г = пг.createLinearGradient(0, 0, 0, H);
+    г.addColorStop(0, '#2b2438'); г.addColorStop(1, '#1a1526');
+    пг.fillStyle = г; пг.fillRect(0, 0, W, H);
+    пг.fillStyle = '#3a2f2a'; пг.fillRect(0, H*0.16, W, H*0.84);
+    for (let i = 0; i < 14; i++) { пг.strokeStyle = 'rgba(0,0,0,.16)'; пг.lineWidth = 2;
+      пг.beginPath(); пг.moveTo(0, H*0.16 + i*H*0.062); пг.lineTo(W, H*0.16 + i*H*0.062); пг.stroke(); }
+    пг.fillStyle = '#7a2436'; пг.beginPath();
+    пг.ellipse(W/2, H*0.66, W*0.28, H*0.22, 0, 0, 7); пг.fill();
+    пг.strokeStyle = '#c7a15a'; пг.lineWidth = 4;
+    пг.beginPath(); пг.ellipse(W/2, H*0.66, W*0.24, H*0.18, 0, 0, 7); пг.stroke();
+    /* стена, окно, лампа, полка */
+    пг.fillStyle = '#4a3f5c'; пг.fillRect(0, 0, W, H*0.16);
+    пг.fillStyle = '#22345f'; пг.fillRect(W*0.10, H*0.03, W*0.16, H*0.10);
+    пг.strokeStyle = '#2a2118'; пг.lineWidth = 4; пг.strokeRect(W*0.10, H*0.03, W*0.16, H*0.10);
+    пг.fillStyle = '#5a412c'; пг.fillRect(W*0.62, H*0.05, W*0.24, H*0.035);
+    пг.fillStyle = '#ffe08a';
+    пг.beginPath(); пг.arc(W*0.5, H*0.06, 16, 0, 7); пг.fill();
+    const сия = пг.createRadialGradient(W*0.5, H*0.06, 4, W*0.5, H*0.06, 130);
+    сия.addColorStop(0, 'rgba(255,224,138,.22)'); сия.addColorStop(1, 'rgba(255,224,138,0)');
+    пг.fillStyle = сия; пг.fillRect(0, 0, W, H);
+    /* человечки — дальние рисуем первыми */
+    const все = Object.keys(человечки).map(k => ({ k, ч:человечки[k] }))
+      .sort((a, b) => a.ч.y - b.ч.y);
+    все.forEach(({ k, ч }) => {
+      const x = ч.x*W, y = ч.y*H, r = W*0.028, цв = ЦВЕТА[(ч.цв|0) % ЦВЕТА.length];
+      пг.fillStyle = 'rgba(0,0,0,.35)';
+      пг.beginPath(); пг.ellipse(x, y + r*0.95, r*1.05, r*0.38, 0, 0, 7); пг.fill();
+      /* ноги топают, когда человечек идёт */
+      const идёт = Math.hypot(ч.x - (ч.пx || ч.x), ч.y - (ч.пy || ч.y)) > 0.0008;
+      const ш = идёт ? Math.sin(Date.now()/90 + x) * r*0.45 : 0;
+      пг.strokeStyle = '#2b2233'; пг.lineWidth = r*0.34; пг.lineCap = 'round';
+      пг.beginPath(); пг.moveTo(x - r*0.3, y + r*0.3); пг.lineTo(x - r*0.3 + ш, y + r*0.9); пг.stroke();
+      пг.beginPath(); пг.moveTo(x + r*0.3, y + r*0.3); пг.lineTo(x + r*0.3 - ш, y + r*0.9); пг.stroke();
+      пг.fillStyle = цв;
+      пг.beginPath(); пг.roundRect(x - r*0.62, y - r*0.5, r*1.24, r*1.0, r*0.4); пг.fill();
+      пг.strokeStyle = цв; пг.lineWidth = r*0.3;
+      пг.beginPath(); пг.moveTo(x - r*0.62, y - r*0.2); пг.lineTo(x - r*1.0, y + r*0.25); пг.stroke();
+      пг.beginPath(); пг.moveTo(x + r*0.62, y - r*0.2); пг.lineTo(x + r*1.0, y + r*0.25); пг.stroke();
+      пг.fillStyle = '#f0c3a0';
+      пг.beginPath(); пг.arc(x, y - r*0.95, r*0.55, 0, 7); пг.fill();
+      пг.fillStyle = '#2b2233';
+      пг.beginPath(); пг.arc(x - r*0.2, y - r*1.0, r*0.09, 0, 7); пг.fill();
+      пг.beginPath(); пг.arc(x + r*0.2, y - r*1.0, r*0.09, 0, 7); пг.fill();
+      /* имя */
+      пг.font = '700 13px system-ui'; пг.textAlign = 'center';
+      пг.fillStyle = 'rgba(0,0,0,.55)';
+      const ш2 = пг.measureText(ч.имя || '').width + 10;
+      пг.beginPath(); пг.roundRect(x - ш2/2, y - r*2.35, ш2, 17, 8); пг.fill();
+      пг.fillStyle = k === мойИд ? '#ffe08a' : '#eaf0ff';
+      пг.fillText(ч.имя || '', x, y - r*2.35 + 13);
+      /* пузырь с фразой */
+      if (ч.фразаT > 0) {
+        ч.фразаT -= dt;
+        пг.font = '700 13px system-ui';
+        const w = Math.min(200, пг.measureText(ч.фраза).width + 16);
+        пг.fillStyle = 'rgba(255,255,255,.92)';
+        пг.beginPath(); пг.roundRect(x - w/2, y - r*4.0, w, 24, 10); пг.fill();
+        пг.beginPath(); пг.moveTo(x - 6, y - r*4.0 + 24); пг.lineTo(x + 6, y - r*4.0 + 24);
+        пг.lineTo(x, y - r*3.3); пг.closePath(); пг.fill();
+        пг.fillStyle = '#10131f';
+        пг.fillText(ч.фраза.length > 22 ? ч.фраза.slice(0, 21) + '…' : ч.фраза, x, y - r*4.0 + 17);
+      }
+      ч.пx = ч.x; ч.пy = ч.y;
+    });
+  }
+
+  let послT = 0, прошлоеВремя = performance.now();
+  function цикл(now) {
+    requestAnimationFrame(цикл);
+    const dt = Math.min(0.05, (now - прошлоеВремя)/1000); прошлоеВремя = now;
+    if (!$('mkn-экран').classList.contains('mkn-on') || !код) return;
+    const я = мойЧеловечек(); я.имя = профиль.имя; я.цв = мойЦвет;
+    let dx = 0, dy = 0;
+    if (КЛАВ.ArrowLeft || КЛАВ.KeyA) dx -= 1;
+    if (КЛАВ.ArrowRight || КЛАВ.KeyD) dx += 1;
+    if (КЛАВ.ArrowUp || КЛАВ.KeyW) dy -= 1;
+    if (КЛАВ.ArrowDown || КЛАВ.KeyS) dy += 1;
+    if (тянуКуда) { dx = тянуКуда.x - я.x; dy = тянуКуда.y - я.y;
+      const д = Math.hypot(dx, dy); if (д < 0.012) { dx = dy = 0; } else { dx /= д; dy /= д; } }
+    const д2 = Math.hypot(dx, dy);
+    if (д2 > 0.01) {
+      я.x = Math.max(0.05, Math.min(0.95, я.x + dx/д2*dt*0.42));
+      я.y = Math.max(0.12, Math.min(0.92, я.y + dy/д2*dt*0.42));
+    }
+    /* чужие человечки плавно доезжают до присланного места */
+    for (const к in человечки) {
+      if (к === мойИд) continue;
+      const ч = человечки[к];
+      ч.x += ((ч.цx === undefined ? ч.x : ч.цx) - ч.x) * Math.min(1, dt*9);
+      ч.y += ((ч.цy === undefined ? ч.y : ч.цy) - ч.y) * Math.min(1, dt*9);
+    }
+    послT -= dt;
+    if (послT <= 0) { послT = 0.09; послатьМесто(); }
+    /* убираем тех, кто вышел */
+    const живые = игроки.map(г => г.ид);
+    for (const к in человечки) if (к !== мойИд && живые.length && !живые.includes(к)) delete человечки[к];
+    рисоватьКомнату(dt);
+  }
+  requestAnimationFrame(цикл);
+
+  /* ── выбор игры и вечеринка ── */
+  function рисоватьВыборИгр() {
+    $('mkn-выбор').style.display = хозяин ? 'block' : 'none';
+    const р = $('mkn-игрыряд'); if (!р || !хозяин) return;
+    р.innerHTML = '';
+    СПИСОК.forEach(и => {
+      const b = document.createElement('button');
+      b.innerHTML = и.em + '<br>' + и.имя + (и.вместе ? '' : '<br><span style="opacity:.6">по очереди</span>');
+      b.onclick = () => позватьВИгру(адресИгры(и.id));
+      р.appendChild(b);
+    });
+  }
+  function начатьВечеринку() {
+    const годные = СПИСОК.filter(и => и.вместе).sort(() => Math.random() - 0.5).slice(0, 3);
+    вечеринка = { игры:годные.map(и => и.id), имена:годные.map(и => и.em + ' ' + и.имя), шаг:0 };
+    сохранитьВечеринку();
+    разослать({ т:'вечеринка', в:вечеринка });
+    показатьВечеринку();
+    пузырь('🎉 Вечеринка: ' + вечеринка.имена.join(' → '), 5);
+    setTimeout(() => позватьВИгру(адресИгры(вечеринка.игры[0])), 1500);
+  }
+  function сохранитьВечеринку() {
+    try { localStorage.setItem('мк-вечеринка', JSON.stringify(вечеринка)); } catch (_) {}
+  }
+  function показатьВечеринку() {
+    const э = $('mkn-вечь'); if (!э) return;
+    if (!вечеринка) { э.style.display = 'none'; return; }
+    э.style.display = 'block';
+    const шаг = Math.min(вечеринка.шаг, вечеринка.игры.length - 1);
+    э.innerHTML = '🎉 <b>Вечеринка</b>: ' + вечеринка.имена.map((н, i) =>
+      (i < вечеринка.шаг ? '<s style="opacity:.5">' + н + '</s>' : (i === вечеринка.шаг ? '<b>' + н + '</b>' : н))
+    ).join(' → ') +
+      (вечеринка.шаг >= вечеринка.игры.length
+        ? '<br><b>Вечеринка окончена!</b>'
+        : (хозяин ? '<br><button class="mkn-кн mkn-зел" id="mkn-дальше" style="margin-top:8px">▶️ ИГРА ' +
+            (вечеринка.шаг + 1) + ' ИЗ ' + вечеринка.игры.length + '</button>' : ''));
+    const к = document.getElementById('mkn-дальше');
+    if (к) к.onclick = () => позватьВИгру(адресИгры(вечеринка.игры[вечеринка.шаг]));
+  }
+  /* вернулись в лобби после игры — двигаем вечеринку на шаг вперёд */
+  (function шагВечеринки() {
+    if (ИГРА !== 'arcade' || !вечеринка) return;
+    const п = new URLSearchParams(location.search);
+    if (п.get('сыграли') === '1' && вечеринка.шаг < вечеринка.игры.length) {
+      вечеринка.шаг++; сохранитьВечеринку();
+    }
+  })();
+
   /* ── КНОПКИ ── */
   $('mkn-закрыть').onclick = () => $('mkn-экран').classList.remove('mkn-on');
   $('mkn-мини').onclick = открыть;
   $('mkn-сохранить').onclick = () => {
-    const и = ($('mkn-имяполе').value || '').trim().slice(0, 14);
+    const и = ($('mkn-имяполе').value || '').trim().slice(0, 18);
     if (!и) { пузырь('Впиши имя'); return; }
     профиль.имя = и; сохранитьПрофиль();
     $('mkn-моёимя').textContent = и; рисоватьАву($('mkn-мояава'), профиль.ава);
@@ -881,6 +1156,7 @@ document.getElementById('badBtn').onclick = галерея;
   $('mkn-войти').onclick = () => войтиВКомнату();
   $('mkn-выйти').onclick = выйти;
   $('mkn-голос').onclick = голос;
+  $('mkn-вечеринка').onclick = начатьВечеринку;
   $('mkn-поле').addEventListener('input', e => {
     e.target.value = e.target.value.toUpperCase().replace(/[^А-ЯЁ]/g, '').slice(0, 5);
   });
@@ -932,6 +1208,11 @@ document.getElementById('badBtn').onclick = галерея;
     наИгроков(f) { слушатели.игроки.push(f); },
     наСтарт(f) { слушатели.старт.push(f); },
     наЧат(f) { слушатели.чат.push(f); },
+    get человечки() { try { return JSON.parse(JSON.stringify(человечки)); } catch (_) { return {}; } },
+    идти(x, y) { const я = мойЧеловечек(); я.x = x; я.y = y; послатьМесто(); return { x, y }; },
+    цвет(i) { мойЦвет = i; профиль.цвет = i; сохранитьПрофиль();
+      мойЧеловечек().цв = i; рисоватьЦвета(); послатьМесто(); return i; },
+    вечеринка() { начатьВечеринку(); return вечеринка; },
     сказать, открыть, выйти,
     позватьВИгру,
     создать: создатьКомнату,
@@ -942,8 +1223,10 @@ document.getElementById('badBtn').onclick = галерея;
 })();
 </script>
 
+<!-- /👥 ОНЛАЙН ПЛАНЕТЫ ИГР -->
+
 <!-- PLANETA_UPDATER_START -->
-<script>window.__APP_VER="aec028e3ff";</script>
+<script>window.__APP_VER="d8a0e6135e";</script>
 
 <script>
 /* scoped PWA updater: the installed offline copy stays until a verified replacement activates. */
