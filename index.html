@@ -337,7 +337,11 @@ function подходит(и) {
   return и.метки.includes(фильтр);
 }
 function нарисовать() {
-  const список = ИГРЫ.filter(подходит);
+  /* 🔤 Игры стоят ПО АЛФАВИТУ (просьба Марка). Сравниваем по-русски,
+     чтобы «Ё» и «Я» встали на свои места, а не как попало. */
+  const список = ИГРЫ.filter(подходит)
+    .slice()
+    .sort((a, b) => a.имя.localeCompare(b.имя, 'ru', { sensitivity:'base' }));
   grid.innerHTML = список.length ? список.map(и => `
     <div class="tile" data-id="${и.id}">
       <img class="ic" src="img/${и.id}-icon.png" alt="" onerror="this.style.display='none'">
@@ -1480,7 +1484,7 @@ document.getElementById('badBtn').onclick = галерея;
 <!-- /👥 ОНЛАЙН ПЛАНЕТЫ ИГР -->
 
 <!-- PLANETA_UPDATER_START -->
-<script>window.__APP_VER="5e106950d1";</script>
+<script>window.__APP_VER="d86620d980";</script>
 
 <script>
 /* scoped PWA updater: the installed offline copy stays until a verified replacement activates. */
