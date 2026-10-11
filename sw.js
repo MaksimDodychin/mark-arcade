@@ -1,5 +1,5 @@
 // Scoped offline application updater; version changes with the payload and updater.
-const VERSION = 'bafebf2df2';
+const VERSION = '5234349ea9';
 const PREFIX = "markgames-";
 const CACHE = PREFIX + VERSION;
 const SCOPE = new URL(self.registration.scope);
