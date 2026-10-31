@@ -1826,6 +1826,8 @@ document.getElementById('krutBtn').onclick = рейтингКрутости;
         const зр = new Т.Mesh(new Т.SphereGeometry(0.045, 10, 8), мт(0x111111, 0.3)); зр.position.set(s*0.15, 0.5, 0.51); тело.add(зр); }
       const шл = new Т.Mesh(new Т.TorusGeometry(0.3, 0.06, 8, 20, Math.PI*1.1), мт(0x374151, 0.5)); шл.position.set(0, 0.62, -0.2); шл.rotation.y = Math.PI/2; тело.add(шл);
       const щ = new Т.Mesh(new Т.BoxGeometry(0.5, 0.08, 0.16), мт(0x1f2937, 0.5)); щ.position.set(0, 0.06, 0.5); тело.add(щ);
+      const aКреп=new Т.Vector3(0,.25,.38),bКреп=new Т.Vector3(0,.09,.50),dКреп=bКреп.clone().sub(aКреп);
+      const муфта=new Т.Mesh(new Т.CylinderGeometry(.075,.075,dКреп.length()+.04,12),мт(0x374151,.5));муфта.position.copy(aКреп.add(bКреп).multiplyScalar(.5));муфта.quaternion.setFromUnitVectors(new Т.Vector3(0,1,0),dКреп.normalize());тело.add(муфта);
       for (const [x, z] of [[-0.36, 0.25], [0.36, 0.25], [-0.36, -0.25], [0.36, -0.25]]) { const кол = new Т.Mesh(new Т.CylinderGeometry(0.1, 0.1, 0.08, 14), мт(0x111111, 0.7)); кол.rotation.z = Math.PI/2; кол.position.set(x, 0.1, z); тело.add(кол); u.ноги.push(кол); }
       u.голова = купол; u.высота = 1.25; u.верх = 0.95;
     } else {
@@ -2779,7 +2781,7 @@ document.getElementById('krutBtn').onclick = рейтингКрутости;
 <!-- /🔊 АУДИОСУБТИТРЫ ПЛАНЕТЫ ИГР -->
 
 <!-- PLANETA_UPDATER_START -->
-<script>window.__APP_VER="b524c03c02";</script>
+<script>window.__APP_VER="3c26b2afe3";</script>
 
 <script>
 /* scoped PWA updater: the installed offline copy stays until a verified replacement activates. */
